@@ -385,21 +385,21 @@
         //
         //Find Euler path
         //
-        public GraphEdge[] EulerPath()
+        public Graph[] EulerPath()
         {
             EulerPathFunctions EPF = new EulerPathFunctions(this);
-            GraphEdge[] Path = EPF.Path();
-            return Path;
+            Graph G = EPF.Path();
+            return G;
         }
 
         //
         //Find Euler Circuit
         //
-        public GraphEdge[] EulerCircuit()
+        public Graph EulerCircuit()
         {
             EulerPathFunctions EPF = new EulerPathFunctions(this);
-            GraphEdge[] Path = EPF.Circuit();
-            return Path;
+            Graph G = EPF.Circuit();
+            return G;
         }
 
         //
