@@ -49,6 +49,13 @@
                 return GetEdgeSet();
             }
         }
+        internal bool IsDirected
+        {
+            get
+            {
+                return CheckIsDirected();
+            }
+        }
         internal bool IsConnected
         {
             get
@@ -627,6 +634,20 @@
             GraphNode[] N = NodeSet;
             while (N[++i].ID != NodeID);
             return i;
+        }
+
+        //
+        //Check if graph is directed
+        //
+        private bool CheckIsDirected()
+        {
+            int i = -1;
+            GraphEdge[] E = EdgeSet;
+            int j = E.Length - 1;
+            while ((++i <= j) && !E[i].IsDirected);
+            i = (i > j) ? -1 : 1;
+            bool b = (i != -1);
+            return b;
         }
 
         //
