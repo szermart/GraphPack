@@ -27,19 +27,19 @@ namespace GraphPack
         //
         //Find euler path
         //
-        internal GraphEdge[] Path()
+        internal Graph Path()
         {
-            GraphEdge[] E = HasPath() ? BuildPath() : new GraphEdge[0];
-            return E;
+            Graph G = HasPath() ? BuildPath() : new GraphEdge[0];
+            return G;
         }
 
         //
         //Find Euler circuit
         //
-        internal GraphEdge[] Circuit()
+        internal Graph Circuit()
         {
-            GraphEdge[] E = HasCircuit() ? BuildPath() : new GraphEdge[0];            
-            return E;
+            Graph G = HasCircuit() ? BuildPath() : new GraphEdge[0];            
+            return G;
         }        
 
 
@@ -74,12 +74,12 @@ namespace GraphPack
         //
         //Build path (Fleury's algorithm)
         //
-        private GraphEdge[] BuildPath()
+        private Graph BuildPath()
         {
 
             //Initialize
-            Graph G = SourceGraph.Copy();            
-            List<GraphEdge> L = new List<GraphEdge>();            
+            Graph G = SourceGraph.Copy();
+            Graph K = G.Shell();            
 
             //Walk through graph to build path            
             GraphNode N = GetFirstNode();            
@@ -91,9 +91,9 @@ namespace GraphPack
                 int j = N.Edges.Length - 1;
                 GraphEdgeIndex Bridges = FindNodeBridges(G, N);
                 while ((++i <= j) && (Bridges.Find(N.Edges[i]) != null));
-                i = (i > j) ? 0 : i;                
+                i = (i > j) ? 0 : i;                                
                 GraphEdge E = N.Edges[i];
-                L.Add(E);
+                K.AddEdge(E);
 
                 //Setup for next iteration.                
                 GraphEdge F = E.ToDirected(false);
@@ -104,7 +104,7 @@ namespace GraphPack
             }
 
             //Wrap up
-            return L.ToArray();
+            return K;
 
         }
 
