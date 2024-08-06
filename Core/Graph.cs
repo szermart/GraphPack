@@ -385,7 +385,7 @@
         //
         //Find Euler path
         //
-        public Graph[] EulerPath()
+        public Graph EulerPath()
         {
             EulerPathFunctions EPF = new EulerPathFunctions(this);
             Graph G = EPF.Path();

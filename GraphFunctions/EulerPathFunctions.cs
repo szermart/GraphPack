@@ -29,7 +29,7 @@ namespace GraphPack
         //
         internal Graph Path()
         {
-            Graph G = HasPath() ? BuildPath() : new GraphEdge[0];
+            Graph G = HasPath() ? BuildPath() : SourceGraph.Shell();
             return G;
         }
 
@@ -38,7 +38,7 @@ namespace GraphPack
         //
         internal Graph Circuit()
         {
-            Graph G = HasCircuit() ? BuildPath() : new GraphEdge[0];            
+            Graph G = HasCircuit() ? BuildPath() : SourceGraph.Shell();            
             return G;
         }        
 
