@@ -13,7 +13,10 @@ namespace GraphPack
         //****************************************************************************************************************************************************************
         //Construction and initialization
         //****************************************************************************************************************************************************************        
-        internal MetricPathFunctions() {}
+        internal MetricPathFunctions(Graph SourceGraph)
+        {
+            this.SourceGraph = SourceGraph.Copy();
+        }
 
 
         //****************************************************************************************************************************************************************
@@ -23,18 +26,18 @@ namespace GraphPack
         //
         //Build short path
         //
-        public Graph ShortPath(Graph G, string SourceNodeID, string SinkNodeID, int MetricIndex)
+        public Graph ShortPath(string SourceNodeID, string SinkNodeID, int MetricIndex)
         {
-            Graph K = MetricPath(G, SourceNodeID, SinkNodeID, MetricIndex, PathTypes.Short);
+            Graph K = MetricPath(SourceNodeID, SinkNodeID, MetricIndex, PathTypes.Short);
             return K;
         }
 
         //
         //Build long path
         //
-        public Graph CriticalPath(Graph G, string SourceNodeID, string SinkNodeID, int MetricIndex)
+        public Graph CriticalPath(string SourceNodeID, string SinkNodeID, int MetricIndex)
         {
-            Graph K = MetricPath(G, SourceNodeID, SinkNodeID,MetricIndex, PathTypes.Critical);
+            Graph K = MetricPath(SourceNodeID, SinkNodeID,MetricIndex, PathTypes.Critical);
             return K;
         }
 
@@ -46,11 +49,12 @@ namespace GraphPack
         //
         //Dykstra path algorithm
         //
-        private Graph MetricPath (Graph G, string SourceNodeID, string SinkNodeID, int MetricIndex, PathTypes PathType)
+        private Graph MetricPath (string SourceNodeID, string SinkNodeID, int MetricIndex, PathTypes PathType)
         {
 
             //Initialize
             GraphPath P = null;
+            Graph G = SourceGraph;
             GraphPathIndex GPI = new GraphPathIndex();
             GraphPathHeap H = new GraphPathHeap(PathType);
             G.ClearTopologicalOrder();
@@ -106,6 +110,12 @@ namespace GraphPack
             return K;
 
         }
+
+
+        //****************************************************************************************************************************************************************
+        //Locals
+        //****************************************************************************************************************************************************************
+        private Graph SourceGraph;
 
     }
 }

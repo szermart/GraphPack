@@ -414,8 +414,8 @@
         //
         public Graph ShortPath(string SourceNodeID, string SinkNodeID, int MetricIndex)
         {
-            MetricPathFunctions MPF = new MetricPathFunctions();
-            Graph G = MPF.ShortPath(this, SourceNodeID, SinkNodeID, MetricIndex);
+            MetricPathFunctions MPF = new MetricPathFunctions(this);
+            Graph G = MPF.ShortPath(SourceNodeID, SinkNodeID, MetricIndex);
             return G;
         }
 
@@ -424,8 +424,8 @@
         //
         public Graph CriticalPath(string SourceNodeID, string SinkNodeID, int MetricIndex)
         {
-            MetricPathFunctions MPF = new MetricPathFunctions();
-            Graph G = MPF.CriticalPath(this, SourceNodeID, SinkNodeID, MetricIndex);
+            MetricPathFunctions MPF = new MetricPathFunctions(this);
+            Graph G = MPF.CriticalPath(SourceNodeID, SinkNodeID, MetricIndex);
             return G;
         }
 
