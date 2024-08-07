@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 namespace GraphPack
 {
     internal class CliqueFunctions
-    {        
+    {
 
 
         //****************************************************************************************************************************************************************
         //Construction and initialization
         //****************************************************************************************************************************************************************        
-        internal CliqueFunctions() {}
+        internal CliqueFunctions(Graph SourceGraph)
+        {
+            this.SourceGraph = SourceGraph.Copy();
+        }
 
 
         //****************************************************************************************************************************************************************
@@ -24,11 +27,12 @@ namespace GraphPack
         //
         //Find maximal clique (Bron-Kerbosch algorithm)
         //
-        internal Graph[] MaximalCliques(Graph K)
+        internal Graph[] MaximalCliques()
         {
 
             //Initialize
             Graph G = null;
+            Graph K = SourceGraph;
             List<string> R = new List<string>();
             List<string> P = K.NodeList.ToList();
             List<string> X = new List<string>();
@@ -149,6 +153,12 @@ namespace GraphPack
             L.AddRange(K);            
             return L;
         }
+
+
+        //****************************************************************************************************************************************************************
+        //Locals
+        //****************************************************************************************************************************************************************
+        private Graph SourceGraph;
 
     }
 }

@@ -474,8 +474,8 @@
         //
         public Graph[] MaximalCliques()
         {
-            CliqueFunctions CF = new CliqueFunctions();
-            Graph[] G = CF.MaximalCliques(this);
+            CliqueFunctions CF = new CliqueFunctions(this);
+            Graph[] G = CF.MaximalCliques();
             return G;
         }
 
