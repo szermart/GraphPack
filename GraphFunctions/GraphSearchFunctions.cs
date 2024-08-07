@@ -43,7 +43,7 @@ namespace GraphPack
             //Traverse graph to build unit graph
             while ((N = Q.Pop()) != null)
             {
-                foreach (GraphEdge E in N.Edges)
+                foreach (GraphEdge E in N.OutBoundEdges)
                 {
                     GraphNode V = U.FindNode(E.SinkNode.ID);
                     if (V == null)
@@ -92,7 +92,7 @@ namespace GraphPack
         private void SubDFS(Graph G, UnitGraph U, GraphNode N, int Order)
         {
             int TOrder = Order + 1;
-            foreach (GraphEdge E in N.Edges)
+            foreach (GraphEdge E in N.OutBoundEdges)
             {
                 GraphNode V = U.FindNode(E.SinkNode.ID);
                 if (V == null)

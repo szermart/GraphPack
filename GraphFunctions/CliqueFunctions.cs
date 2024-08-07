@@ -123,7 +123,7 @@ namespace GraphPack
         private List<string> GetNeighbors(GraphNode N)
         {
             List<string> L = new List<string>();
-            foreach (GraphNode V in N.Neighbors)
+            foreach (GraphNode V in N.OutboundNeighbors)
                 L.Add(V.ID);
             return L;
         }        

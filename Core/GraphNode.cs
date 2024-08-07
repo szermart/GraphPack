@@ -14,7 +14,7 @@ namespace GraphPack
         //****************************************************************************************************************************************************************
         internal string ID { get; private set; }        
         internal int Order { get; private set; }
-        internal GraphEdge[] Edges { get; private set; }
+        internal GraphEdge[] OutBoundEdges { get; private set; }
         internal int Valence
         {
             get
@@ -22,11 +22,11 @@ namespace GraphPack
                 return GetValence();
             }
         }
-        internal GraphNode[] Neighbors
+        internal GraphNode[] OutboundNeighbors
         {
             get
             {
-                return GetNeighbors();
+                return GetOutboundNeighbors();
             }
         }
 
@@ -51,7 +51,7 @@ namespace GraphPack
         {
             this.Order = 0;
             this.AI = new AdjacencyIndex();
-            this.Edges = new GraphEdge[0];
+            this.OutBoundEdges = new GraphEdge[0];
         }
 
 
@@ -70,7 +70,7 @@ namespace GraphPack
             if (X == null)
             {
                 AI.Insert(A);
-                Edges = BuildEdgeSet();
+                OutBoundEdges = BuildEdgeSet();
             }
         }
 
@@ -80,7 +80,7 @@ namespace GraphPack
         internal void RemoveAdjacency(Adjacency A)
         {
             AI.Delete(A);
-            Edges = BuildEdgeSet();
+            OutBoundEdges = BuildEdgeSet();
         }
 
         //
@@ -114,7 +114,7 @@ namespace GraphPack
         internal void ClearAdjacencies()
         {
             AI.Clear();
-            Edges = new GraphEdge[0];
+            OutBoundEdges = new GraphEdge[0];
         }
 
         //
@@ -174,10 +174,10 @@ namespace GraphPack
         //
         //Get neighbors
         //
-        private GraphNode[] GetNeighbors()
+        private GraphNode[] GetOutboundNeighbors()
         {
             List<GraphNode> L = new List<GraphNode>();
-            foreach (GraphEdge E in Edges)
+            foreach (GraphEdge E in OutBoundEdges)
                 L.Add(E.SinkNode);
             return L.ToArray();
         }

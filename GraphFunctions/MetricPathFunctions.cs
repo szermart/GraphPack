@@ -77,7 +77,7 @@ namespace GraphPack
                     GraphNode V = P.SinkNode;
                     int StartOrder = G.FindNode(V.ID).Order;
                     GraphPath StartPath = GPI.Find(V.ID);
-                    foreach (GraphEdge E in V.Edges)
+                    foreach (GraphEdge E in V.OutBoundEdges)
                     {
                         GraphNode W = E.SinkNode;                        
                         if (G.FindNode(W.ID).Order == 0)

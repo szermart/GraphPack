@@ -106,7 +106,7 @@ namespace GraphPack
             else
             {
                 //Extend search to adjacent nodes
-                foreach (GraphEdge E in G.FindNode(P.SinkNode.ID).Edges)
+                foreach (GraphEdge E in G.FindNode(P.SinkNode.ID).OutBoundEdges)
                 {
                     if (!P.Contains(E.SinkNode.ID))
                     {

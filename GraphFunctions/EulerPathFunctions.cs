@@ -88,11 +88,11 @@ namespace GraphPack
 
                 //Select graph edge
                 int i = -1;
-                int j = N.Edges.Length - 1;
+                int j = N.OutBoundEdges.Length - 1;
                 GraphEdgeIndex Bridges = FindNodeBridges(G, N);
-                while ((++i <= j) && (Bridges.Find(N.Edges[i]) != null));
+                while ((++i <= j) && (Bridges.Find(N.OutBoundEdges[i]) != null));
                 i = (i > j) ? 0 : i;                                
-                GraphEdge E = N.Edges[i];
+                GraphEdge E = N.OutBoundEdges[i];
                 K.AddEdge(E);
 
                 //Setup for next iteration.                
@@ -157,7 +157,7 @@ namespace GraphPack
             List<GraphEdge> Bridges = new List<GraphEdge>();
 
             //Test node edges for connectivity
-            foreach (GraphEdge E in N.Edges)
+            foreach (GraphEdge E in N.OutBoundEdges)
             {
                 Graph H = G.Copy();
                 GraphEdge F = E.ToDirected(false);

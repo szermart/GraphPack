@@ -291,7 +291,7 @@
         //
         //Build DFS graph
         //
-        public UnitGraph ToDFSGraph(string NodeID)
+        internal UnitGraph ToDFSGraph(string NodeID)
         {
             GraphSearchFunctions GSF = new GraphSearchFunctions();
             UnitGraph U = GSF.ToDFSGraph(this, NodeID);
@@ -301,7 +301,7 @@
         //
         //Convert to unit graph
         //
-        public UnitGraph ToUnitGraph()
+        internal UnitGraph ToUnitGraph()
         {        
             GraphConversionFunctions GCF = new GraphConversionFunctions();            
             UnitGraph U = GCF.ToUnitGraph(this);
@@ -321,13 +321,60 @@
         //
         //Remove orphans
         //
-        public Graph RemoveOrphans()
+        internal Graph RemoveOrphans()
         {
             Graph G = this.Copy();
             foreach (GraphNode N in G.NodeSet)
                 if (N.Valence == 0)
                     G.RemoveNode(N.ID);
             return G;            
+        }
+
+        //
+        //Get outbound neighbours
+        //
+        internal GraphNode[] OutBoundNeighbours(string NodeID)
+        {
+            GraphNodeSearchList L = new GraphNodeSearchList();
+            foreach (GraphEdge E in OutBoundEdges(NodeID))
+                L.Add(E.SinkNode);
+            return L.ToList().ToArray();
+        }
+
+        //
+        //Get outbound edges
+        //
+        internal GraphEdge[] OutBoundEdges(string NodeID)
+        {            
+            GraphNode N = GNI.Find(NodeID);
+            GraphEdge[] E = (N == null) ? new GraphEdge[0] : N.OutBoundEdges;
+            return E;
+        }
+
+        //
+        //Get inbound neighbours
+        //
+        internal GraphNode[] InBoundNeighbors(string NodeID)
+        {
+            GraphNodeSearchList L = new GraphNodeSearchList();
+            foreach (GraphEdge E in InBoundEdges(NodeID))
+                L.Add(E.SourceNode);
+            return L.ToList().ToArray();
+        }
+
+        //
+        //Get inbound edges
+        //
+        internal GraphEdge[] InBoundEdges(string NodeID)
+        {
+            List<GraphEdge> L = new List<GraphEdge>();
+            GraphNode V = GNI.Find(NodeID);
+            if (V != null)
+                foreach (GraphNode N in NodeSet)
+                    foreach (GraphEdge E in N.OutBoundEdges)
+                        if (E.SinkNode.ID == NodeID)
+                            L.Add(E);
+            return L.ToArray();
         }
 
         //
@@ -482,7 +529,7 @@
         //
         //Create new graph shell
         //
-        public Graph Shell()
+        internal Graph Shell()
         {
             Graph G = MyFactory.CreateGraph(ID);
             return G;
@@ -564,7 +611,7 @@
             GraphEdgeIndex GEI = new GraphEdgeIndex();
             foreach (GraphNode N in GNI.Scan())
             {
-                foreach (GraphEdge E in N.Edges)
+                foreach (GraphEdge E in N.OutBoundEdges)
                 {
                     GraphEdge R = E.Reverse();
                     GraphEdge V = GEI.Find(R);
