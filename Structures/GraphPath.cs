@@ -69,35 +69,47 @@ namespace GraphPack
             return HasNode;
         }
 
-        //
+        //TODO--> Cleanup
         //To edges
         //
-        internal GraphEdge[] ToEdgeSet()
-        {
-            GraphPath P = this;
-            List<GraphEdge> L = new List<GraphEdge>();
-            while (P.InternalEdge != null) 
-            {
-                L.Add(P.InternalEdge);
-                P = P.InnerPath;
-            }
-            L.Reverse();
-            return L.ToArray();            
-        }
+        //internal GraphEdge[] ToEdgeSet()
+        //{
+        //    GraphPath P = this;
+        //    List<GraphEdge> L = new List<GraphEdge>();
+        //    while (P.InternalEdge != null) 
+        //    {
+        //        L.Add(P.InternalEdge);
+        //        P = P.InnerPath;
+        //    }
+        //    L.Reverse();
+        //    return L.ToArray();            
+        //}
 
-        //
+        //TODO--> Cleanup
         //To node set
         //
-        internal GraphNode[] ToNodeSet()
+        //internal GraphNode[] ToNodeSet()
+        //{
+        //    GraphNodeIndex GNI = new GraphNodeIndex();
+        //    GNI.Insert(SourceNode);
+        //    GNI.Insert(SinkNode);
+        //    GraphPath P = this;
+        //    while ((P = P.InnerPath) != null)
+        //        GNI.Insert(P.SinkNode);            
+        //    return GNI.Scan();
+        //}       
+        
+        //
+        //Convert path to graph
+        //
+        internal Graph ToGraph(Graph Template)
         {
-            GraphNodeIndex GNI = new GraphNodeIndex();
-            GNI.Insert(SourceNode);
-            GNI.Insert(SinkNode);
-            GraphPath P = this;
-            while ((P = P.InnerPath) != null)
-                GNI.Insert(P.SinkNode);            
-            return GNI.Scan();
-        }        
+            Graph G = Template.Shell();
+            foreach (GraphEdge E in ToEdgeSet())
+                G.AddEdge(E);
+            return G;
+        }
+
 
 
         //****************************************************************************************************************************************************************
@@ -112,6 +124,37 @@ namespace GraphPack
             GraphNode[] N = ToNodeSet();
             int n = N.Length;
             return n;
+        }
+
+        //
+        //To node set
+        //
+        private GraphNode[] ToNodeSet()
+        {
+            GraphNodeIndex GNI = new GraphNodeIndex();
+            GNI.Insert(SourceNode);
+            GNI.Insert(SinkNode);
+            GraphPath P = this;
+            while ((P = P.InnerPath) != null)
+                GNI.Insert(P.SinkNode);
+            return GNI.Scan();
+        }
+
+
+        //
+        //To edges
+        //
+        private GraphEdge[] ToEdgeSet()
+        {
+            GraphPath P = this;
+            List<GraphEdge> L = new List<GraphEdge>();
+            while (P.InternalEdge != null)
+            {
+                L.Add(P.InternalEdge);
+                P = P.InnerPath;
+            }
+            L.Reverse();
+            return L.ToArray();
         }
 
         //

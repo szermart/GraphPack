@@ -89,7 +89,7 @@ namespace GraphPack
                 //Select graph edge
                 int i = -1;
                 int j = N.OutBoundEdges.Length - 1;
-                GraphEdgeIndex Bridges = FindNodeBridges(G, N);
+                GraphEdgeIndex Bridges = IdentifyNodeBridges(G, N);
                 while ((++i <= j) && (Bridges.Find(N.OutBoundEdges[i]) != null));
                 i = (i > j) ? 0 : i;                                
                 GraphEdge E = N.OutBoundEdges[i];
@@ -150,7 +150,7 @@ namespace GraphPack
         //
         //Build set of graph bridges
         //
-        private GraphEdgeIndex FindNodeBridges(Graph G, GraphNode N)
+        private GraphEdgeIndex IdentifyNodeBridges(Graph G, GraphNode N)
         {
 
             //Initialize

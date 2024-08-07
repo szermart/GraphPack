@@ -452,21 +452,21 @@
         //
         //Find Hamiltonian path
         //
-        public GraphEdge[] HamiltonianPath(string NodeID)
+        public Graph HamiltonianPath(string NodeID)
         {
             HamiltonianFunctions HF = new HamiltonianFunctions(this);
-            GraphEdge[] E = HF.Path(NodeID);
-            return E;
+            Graph G = HF.Path(NodeID);
+            return G;
         }
 
         //
         //Find Hamiltonian circuit
         //
-        public GraphEdge[] HamiltonianCircuit(string NodeID)
+        public Graph HamiltonianCircuit(string NodeID)
         {
             HamiltonianFunctions HF = new HamiltonianFunctions(this);
-            GraphEdge[] E = HF.Circuit(NodeID);
-            return E;
+            Graph G = HF.Circuit(NodeID);
+            return G;
         }
 
         //

@@ -15,7 +15,7 @@ namespace GraphPack
         
         internal HamiltonianFunctions(Graph SourceGraph)
         {
-            this.SourceGraph = SourceGraph;
+            this.SourceGraph = SourceGraph.Copy();
         }       
 
 
@@ -26,19 +26,19 @@ namespace GraphPack
         //
         //Get path
         //
-        internal GraphEdge[] Path(string NodeID)
+        internal Graph Path(string NodeID)
         {
-            GraphEdge[] E = BuildPath(NodeID, PathTypes.HamiltonianPath);
-            return E;
+            Graph G = BuildPath(NodeID, PathTypes.HamiltonianPath);
+            return G;
         }
 
         //
         //Get circuit
         //
-        internal GraphEdge[] Circuit(string NodeID)
+        internal Graph Circuit(string NodeID)
         {
-            GraphEdge[] E = HasCircuit() ? BuildPath(NodeID, PathTypes.HamiltonianCircuit) : new GraphEdge[0];
-            return E;
+            Graph G = HasCircuit() ? BuildPath(NodeID, PathTypes.HamiltonianCircuit) : SourceGraph.Shell();
+            return G;
         }
 
 
@@ -64,7 +64,7 @@ namespace GraphPack
         //
         //Find paths
         //
-        private GraphEdge[] BuildPath(string NodeID, PathTypes PathType)
+        private Graph BuildPath(string NodeID, PathTypes PathType)
         {
 
             //Initialize
@@ -81,8 +81,8 @@ namespace GraphPack
 
             //Wrap up
             P = H.Pop();
-            GraphEdge[] E = (P == null) ? new GraphEdge[0] : P.ToEdgeSet();
-            return E;
+            Graph G = (P == null) ? SourceGraph.Shell() : P.ToGraph(SourceGraph);
+            return G;
             
         }
 

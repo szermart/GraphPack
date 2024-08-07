@@ -98,16 +98,10 @@ namespace GraphPack
                     }                    
                 }
 
-            }
-
-            //Build path graph
-            Graph K = G.Shell();
-            P = GPI.Find(SinkNodeID);
-            GraphEdge[] Path = P.ToEdgeSet();
-            foreach (GraphEdge E in Path)
-                K.AddEdge(E);
+            }            
 
             //Wrap up
+            Graph K = P.ToGraph(G);
             G.ClearTopologicalOrder();
             return K;
 
