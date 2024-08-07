@@ -16,7 +16,7 @@ namespace GraphPack
         //****************************************************************************************************************************************************************        
         internal EulerPathFunctions(Graph SourceGraph)
         {
-            this.SourceGraph = SourceGraph;
+            this.SourceGraph = SourceGraph.Copy();
         }
 
 
