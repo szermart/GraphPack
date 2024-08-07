@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,24 +38,11 @@ namespace GraphPack
         //
         internal Graph Intersect(Graph G, Graph H)
         {
-
-            //Initialize
-            GraphNodeSearchList L = new GraphNodeSearchList();
-
-            //Build common set of intersecting nodes
-            foreach (GraphNode N in G.NodeSet)
-                if (H.FindNode(N.ID) != null)
-                    L.Add(N);
-
-            //Remove non-intersection nodes
             Graph I = G.Copy();
-            foreach (GraphNode N in G.NodeSet)
-                if (L.Find(N) == null)
-                    I.RemoveNode(N.ID);
-
-            //Wrap up
+            foreach(GraphNode N in G.NodeSet)
+                if (H.FindNode(N.ID) == null)
+                    I.RemoveNode(N.ID);           
             return I;
-
         }
 
         //

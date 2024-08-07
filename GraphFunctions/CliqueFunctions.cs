@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GraphPack
+﻿namespace GraphPack
 {
     internal class CliqueFunctions
     {
@@ -135,10 +128,10 @@ namespace GraphPack
         //
         //Trim graph
         //
-        private Graph TrimGraph(Graph K, List<string> NSet)
+        private Graph TrimGraph(Graph K, List<string> NodeSet)
         {
             Graph G = K.Shell();
-            foreach (string NodeID in NSet)
+            foreach (string NodeID in NodeSet)
                 G.AddNode(NodeID);
             G = K.Intersect(G);
             return G;
