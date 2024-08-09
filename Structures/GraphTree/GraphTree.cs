@@ -81,7 +81,7 @@ namespace GraphPack
         //
         //Get topological node set
         //
-        private T[] GetTopologicalNodeSet(T SourceItem)
+        public T[] GetTopologicalNodeSet(T SourceItem)
         {
             List<T> Items = new List<T>();
             string ItemKey = BuildItemKey(SourceItem);
