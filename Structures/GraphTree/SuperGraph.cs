@@ -6,36 +6,27 @@ using System.Threading.Tasks;
 
 namespace GraphPack
 {
-    internal class GraphGlobals
+    internal class SuperGraph : GraphTree<Graph>
     {        
 
         //****************************************************************************************************************************************************************
         //Construction and initialization
         //****************************************************************************************************************************************************************        
-        internal GraphGlobals() {}
+        internal SuperGraph() {}
 
 
         //****************************************************************************************************************************************************************
-        //Global constants
+        //Operating methods
         //****************************************************************************************************************************************************************
-        internal const int NodeTreeOrder = 10;
-        internal const int AdjacencyTreeOrder = 10;
-        internal const int GraphEdgeTreeOrder = 10;
-        internal const int DefaultTopologicalOrder = 0;
+
+        //
+        //Implement key builder
+        //
+        protected override string BuildItemKey(Graph Item)
+        {
+            string Key = Item.ID;
+            return Key;
+        }
 
     }
-    
-
-    //****************************************************************************************************************************************************************
-    //Enumerations
-    //****************************************************************************************************************************************************************        
-    internal enum PathTypes
-    {
-        None = 0,
-        Short = 1,
-        Critical = 2,
-        HamiltonianPath = 3,
-        HamiltonianCircuit = 4
-    };
-
 }

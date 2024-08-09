@@ -1,41 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppDataStructures.BTree;
 
 namespace GraphPack
 {
-    internal class GraphGlobals
+    internal class GraphTreeItemIndex<T> : BTree<T>
     {        
 
         //****************************************************************************************************************************************************************
         //Construction and initialization
         //****************************************************************************************************************************************************************        
-        internal GraphGlobals() {}
+        internal GraphTreeItemIndex(GraphTree<T>.ItemKeyBuilder KB)
+        {
+            this.KB = KB;
+        }
 
 
         //****************************************************************************************************************************************************************
-        //Global constants
+        //Operating methods
         //****************************************************************************************************************************************************************
-        internal const int NodeTreeOrder = 10;
-        internal const int AdjacencyTreeOrder = 10;
-        internal const int GraphEdgeTreeOrder = 10;
-        internal const int DefaultTopologicalOrder = 0;
+
+        //
+        //Implement comparator
+        //
+        protected override string BuildItemKey(T Item)
+        {
+            string Key = KB(Item);
+            return Key;
+        }        
+
+
+        //****************************************************************************************************************************************************************
+        //Locals
+        //****************************************************************************************************************************************************************
+        private GraphTree<T>.ItemKeyBuilder KB;
 
     }
-    
-
-    //****************************************************************************************************************************************************************
-    //Enumerations
-    //****************************************************************************************************************************************************************        
-    internal enum PathTypes
-    {
-        None = 0,
-        Short = 1,
-        Critical = 2,
-        HamiltonianPath = 3,
-        HamiltonianCircuit = 4
-    };
-
 }

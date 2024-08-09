@@ -29,5 +29,15 @@ namespace GraphPack
             base.AddEdge(SourceNodeID, SinkNodeID, M.ToArray(), IsDirected);
         }
 
+        //
+        //Remove edge does not need to specific metric value.  Always use unit edge metric
+        //
+        internal void RemoveEdge(string SourceNodeID, string SinkNodeID, bool IsDirected)
+        {
+            UnitEdgeMetricFactory EMF = new UnitEdgeMetricFactory();
+            UnitEdgeMetric M = (UnitEdgeMetric)EMF.Create();
+            base.RemoveEdge(SourceNodeID, SinkNodeID, M.ToArray(), IsDirected);
+        }
+
     }
 }
