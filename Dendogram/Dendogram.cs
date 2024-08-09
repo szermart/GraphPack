@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphPack
 {
-    public abstract class GraphTree<T>
+    public abstract class Dendogram<T>
     {
 
         //****************************************************************************************************************************************************************
@@ -16,7 +16,7 @@ namespace GraphPack
         //
         //Constructor
         //
-        public GraphTree()
+        public Dendogram()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace GraphPack
         //
         private void InitializeComponent()
         {
-            this.ItemIndex = new GraphTreeItemIndex<T>(this.BuildItemKey);
+            this.ItemIndex = new DendogramItemIndex<T>(this.BuildItemKey);
             this.InternalGraph = new UnitGraph();
         }
 
@@ -113,7 +113,7 @@ namespace GraphPack
         //Locals
         //****************************************************************************************************************************************************************
         private UnitGraph InternalGraph;
-        private GraphTreeItemIndex<T> ItemIndex;
+        private DendogramItemIndex<T> ItemIndex;
         internal delegate string ItemKeyBuilder(T Item);
 
     }
