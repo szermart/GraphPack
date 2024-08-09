@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AppDataStructures.BTree;
 
 namespace GraphPack
 {
-    internal class GraphTreeItemIndex<T> : BTree<T>
+    public class GraphDendogram : Dendogram<Graph>
     {        
 
         //****************************************************************************************************************************************************************
         //Construction and initialization
         //****************************************************************************************************************************************************************        
-        internal GraphTreeItemIndex(GraphTree<T>.ItemKeyBuilder KB)
-        {
-            this.KB = KB;
-        }
+        public GraphDendogram() {}
 
 
         //****************************************************************************************************************************************************************
@@ -25,19 +20,13 @@ namespace GraphPack
         //****************************************************************************************************************************************************************
 
         //
-        //Implement comparator
+        //Implement key builder
         //
-        protected override string BuildItemKey(T Item)
+        protected override string BuildItemKey(Graph Item)
         {
-            string Key = KB(Item);
+            string Key = Item.ID;
             return Key;
-        }        
-
-
-        //****************************************************************************************************************************************************************
-        //Locals
-        //****************************************************************************************************************************************************************
-        private GraphTree<T>.ItemKeyBuilder KB;
+        }
 
     }
 }
