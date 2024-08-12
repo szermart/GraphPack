@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppDataStructures.BTree;
 
 namespace GraphPack
 {
-    public class GraphDendogram : Dendogram<Graph>
+    internal class GraphIndex : BTree<Graph>
     {        
 
         //****************************************************************************************************************************************************************
         //Construction and initialization
         //****************************************************************************************************************************************************************        
-        public GraphDendogram() {}
+        internal GraphIndex() {}
 
 
         //****************************************************************************************************************************************************************

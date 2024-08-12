@@ -36,7 +36,7 @@ namespace GraphPack
             if (N != null)
             {
                 U.AddNode(N.ID);
-                U.FindNode(N.ID).SetTopologicalOrder(++NodeOrder);
+                U.FindNode(N.ID).SetOrder(++NodeOrder);
                 Q.Push(N);
             }
 
@@ -50,7 +50,7 @@ namespace GraphPack
                     {
                         V = E.SinkNode;
                         U.AddEdge(E.SourceNode.ID, V.ID, true);
-                        U.FindNode(V.ID).SetTopologicalOrder(++NodeOrder);
+                        U.FindNode(V.ID).SetOrder(++NodeOrder);
                         Q.Push(V);
                     }
                 }
@@ -98,7 +98,7 @@ namespace GraphPack
                 if (V == null)
                 {
                     U.AddEdge(E.SourceNode.ID, V.ID, true);
-                    U.FindNode(V.ID).SetTopologicalOrder(TOrder);
+                    U.FindNode(V.ID).SetOrder(TOrder);
                     SubDFS(G, U, V, TOrder);
                 }
             }

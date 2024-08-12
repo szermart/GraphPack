@@ -23,7 +23,7 @@ namespace GraphPack
         //
         //Implement comparator
         //
-        protected override string BuildKey(GraphNode Item)
+        protected override string BuildID(GraphNode Item)
         {
             string Key = Item.ID;
             return Key;

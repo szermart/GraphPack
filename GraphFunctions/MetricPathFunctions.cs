@@ -70,7 +70,7 @@ namespace GraphPack
             {
 
                 //Initialize graph traversal          
-                N.SetTopologicalOrder(++NodeOrder);
+                N.SetOrder(++NodeOrder);
                 P = new GraphPath(N, MetricIndex);
                 H.Push(P);
                 GPI.Insert(P);                
@@ -85,7 +85,7 @@ namespace GraphPack
                     {
                         GraphNode W = E.SinkNode;                        
                         if (G.FindNode(W.ID).Order == 0)
-                            W.SetTopologicalOrder(++NodeOrder);                        
+                            W.SetOrder(++NodeOrder);                        
                         if (W.Order > StartOrder)                         
                         {
                             GraphPath EndPath = new GraphPath(E, StartPath);

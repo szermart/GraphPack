@@ -235,7 +235,7 @@
         public void ClearTopologicalOrder()
         {
             foreach (GraphNode N in NodeSet)
-                N.ClearTopologicalOrder();
+                N.ClearOrder();
         }
 
         //
@@ -669,7 +669,7 @@
         private void SetTopology(Graph G)
         {
             foreach (GraphNode N in G.NodeSet)
-                FindNode(N.ID).SetTopologicalOrder(N.Order);
+                FindNode(N.ID).SetOrder(N.Order);
         }        
 
         //

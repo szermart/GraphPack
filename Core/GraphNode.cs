@@ -120,15 +120,15 @@ namespace GraphPack
         //
         //Clear topological order
         //
-        internal void ClearTopologicalOrder()
+        internal void ClearOrder()
         {
-            SetTopologicalOrder(GraphGlobals.DefaultTopologicalOrder);
+            SetOrder(GraphGlobals.DefaultTopologicalOrder);
         }
 
         //
         //Set topological order
         //
-        internal void SetTopologicalOrder(int Order)
+        internal void SetOrder(int Order)
         {
             this.Order = Order;
         }

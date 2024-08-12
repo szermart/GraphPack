@@ -18,7 +18,9 @@ namespace GraphPack
         //****************************************************************************************************************************************************************
         //Global constants
         //****************************************************************************************************************************************************************
+        internal const int NullItemLevel = -1;
         internal const int NodeTreeOrder = 10;
+        internal const int InitialItemLevel = 0;
         internal const int AdjacencyTreeOrder = 10;
         internal const int GraphEdgeTreeOrder = 10;
         internal const int DefaultTopologicalOrder = 0;
